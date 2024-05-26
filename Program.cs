@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using apiPc3.Data;
+using apiPc3.Integration;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using apiPc3.Integration.dto;
 
-namespace apiPc3.Integration.dto
+namespace apiPc3.Integration
 {
     public class ListarUnUsuarioApiIntegration
     {
