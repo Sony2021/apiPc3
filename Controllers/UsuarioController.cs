@@ -14,18 +14,30 @@ namespace apiPc3.Controllers
     public class UsuarioController : Controller
     {
         private readonly ILogger<UsuarioController> _logger;
-         private readonly CrearUsuarioApiIntegration _createUser;
+        private readonly ListarUsuariosApiIntegration _listUsers;
+        private readonly CrearUsuarioApiIntegration _createUser;
     
 
     public UsuarioController(ILogger<UsuarioController> logger,
-        
+        ListarUsuariosApiIntegration listUsers,
         CrearUsuarioApiIntegration createUser)
         {
             _logger = logger;
+            _listUsers = listUsers;
             _createUser = createUser;
         }
+    [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            List<Usuario> users = await _listUsers.GetAllUser();
+            return View(users);
+        }
 
-
+    public IActionResult Create()
+        {
+            return View();
+        }
+        
      [HttpPost]
      public async Task<IActionResult> Create(string name, string job)
         {
