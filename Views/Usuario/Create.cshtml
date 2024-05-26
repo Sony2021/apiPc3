@@ -1,105 +1,38 @@
-@model List<apiPc3.Integration.dto.Usuario>
-
 @{
-    ViewData["Title"] = "Usuarios";
+    ViewData["Title"] = "Crear Usuario";
 }
 
 <div class="container my-5">
-    <h2 class="mb-4 text-center">@ViewData["Title"]</h2>
+    <h1 class="mb-4">@ViewData["Title"]</h1>
 
-    <div class="text-end mb-3">
-        <a href="@Url.Action("Create", "Usuario")" class="btn btn-primary">Crear usuario</a>
-    </div>
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div id="successMessage" class="alert alert-success" role="alert">
+            @TempData["SuccessMessage"]
+        </div>
+    }
 
-    <table class="table table-striped table-hover">
-        <thead class="table-dark">
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Avatar</th>
-                <th>Perfil</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model != null && Model.Count > 0)
-            {
-                foreach (var user in Model)
-                {
-                    <tr>
-                        <td>@user.Id</td>
-                        <td>@user.Email</td>
-                        <td>@user.Nombre</td>
-                        <td>@user.Apellido</td>
-                        <td><img src="@user.Avatar" alt="Avatar" class="img-fluid rounded-circle" style="width:50px;height:50px;" /></td>
-                        <td><a href="@Url.Action("Perfil", new { Id = user.Id })" class="btn btn-outline-secondary btn-sm">Ir a Perfil</a></td>
-                    </tr>
-                }
-            }
-            else
-            {
-                <tr>
-                    <td colspan="6" class="text-center">No users found.</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <form asp-action="Create" method="post">
+        <div class="mb-3">
+            <label for="name" class="form-label">Nombre:</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label for="job" class="form-label">Trabajo:</label>
+            <input type="text" class="form-control" id="job" name="job" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Crear Usuario</button>
+    </form>
 </div>
 
-<!-- Custom Styles -->
-<style>
-    .container {
-        background-color: #ffffff;
-        padding: 2rem;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    h2 {
-        font-size: 2rem;
-        font-weight: 700;
-        color: #00796b;
-    }
-    .btn-primary {
-        background-color: #00796b;
-        border-color: #00796b;
-        transition: background-color 0.3s, border-color 0.3s;
-    }
-    .btn-primary:hover {
-        background-color: #005f56;
-        border-color: #005f56;
-    }
-    .table {
-        margin-top: 1rem;
-    }
-    .table th, .table td {
-        vertical-align: middle;
-    }
-    .table-striped tbody tr:nth-of-type(odd) {
-        background-color: rgba(0, 123, 255, 0.05);
-    }
-    .table-hover tbody tr:hover {
-        background-color: rgba(0, 123, 255, 0.1);
-    }
-    .table-dark th {
-        background-color: #00796b;
-        color: #ffffff;
-    }
-    .btn-outline-secondary {
-        color: #00796b;
-        border-color: #00796b;
-        transition: color 0.3s, border-color 0.3s;
-    }
-    .btn-outline-secondary:hover {
-        color: #ffffff;
-        background-color: #00796b;
-        border-color: #005f56;
-    }
-    .img-fluid {
-        max-width: 100%;
-        height: auto;
-    }
-    .rounded-circle {
-        border-radius: 50%;
-    }
-</style>
+@section Scripts {
+    <script>
+        // Ocultar el mensaje de éxito después de 3 segundos
+        setTimeout(function() {
+            document.getElementById('successMessage').style.display = 'none';
+        }, 5000);
+    </script>
+}
+
+
+

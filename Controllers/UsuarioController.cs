@@ -10,36 +10,44 @@ using apiPc3.Integration.dto;
 
 namespace apiPc3.Controllers
 {
- 
     public class UsuarioController : Controller
     {
         private readonly ILogger<UsuarioController> _logger;
         private readonly ListarUsuariosApiIntegration _listUsers;
+        private readonly ListarUnUsuarioApiIntegration _unUser;
         private readonly CrearUsuarioApiIntegration _createUser;
-    
 
-    public UsuarioController(ILogger<UsuarioController> logger,
+        public UsuarioController(ILogger<UsuarioController> logger,
         ListarUsuariosApiIntegration listUsers,
+        ListarUnUsuarioApiIntegration unUser,
         CrearUsuarioApiIntegration createUser)
         {
             _logger = logger;
             _listUsers = listUsers;
+            _unUser = unUser;
             _createUser = createUser;
         }
-    [HttpGet]
+
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             List<Usuario> users = await _listUsers.GetAllUser();
             return View(users);
         }
 
-    public IActionResult Create()
+        [HttpGet]
+        public async Task<IActionResult> Perfil(int Id)
+        {
+            Usuario user = await _unUser.GetUser(Id);
+            return View(user);
+        }
+
+        public IActionResult Create()
         {
             return View();
         }
-        
-     [HttpPost]
-     public async Task<IActionResult> Create(string name, string job)
+        [HttpPost]
+        public async Task<IActionResult> Create(string name, string job)
         {
             try
             {
@@ -67,13 +75,16 @@ namespace apiPc3.Controllers
             
             // Redireccionar a la acción Index
             return View();
-        }   
+        }
+
+
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View("Error!");
         }
-
-    }    
+    }
 }
