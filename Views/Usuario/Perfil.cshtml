@@ -1,0 +1,90 @@
+@model apiPc3.Integration.dto.Usuario
+
+@{
+    ViewData["Title"] = "Perfil de Usuario";
+}
+
+<div class="container my-5">
+    <h1 class="mb-4">@ViewData["Title"]</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">@Model.Nombre @Model.Apellido</h2>
+                    <h5 class="card-subtitle mb-2 text-muted">ID: @Model.Id</h5>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="@Model.Avatar" alt="Avatar" class="img-fluid rounded-circle" style="width:100px;height:100px;" />
+                        </div>
+                        <div class="col-md-8">
+                            <dl class="row">
+                                <dt class="col-sm-4">Email:</dt>
+                                <dd class="col-sm-8">@Model.Email</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="@Url.Action("Index", "Usuario")" class="btn btn-secondary">Volver a la lista de usuarios</a>
+</div>
+
+<!-- Custom Styles -->
+<style>
+    .container {
+        background-color: #ffffff;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #00796b;
+        margin-bottom: 1rem;
+    }
+    .card {
+        border: none;
+        transition: box-shadow 0.3s;
+    }
+    .card:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .card-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #333333;
+    }
+    .card-subtitle {
+        font-size: 1.25rem;
+        font-weight: 500;
+        color: #666666;
+    }
+    .img-fluid {
+        max-width: 100%;
+        height: auto;
+    }
+    .rounded-circle {
+        border-radius: 50%;
+    }
+    dl.row dt {
+        font-weight: 600;
+        color: #333333;
+    }
+    dl.row dd {
+        color: #666666;
+    }
+    .btn-secondary {
+        background-color: #00796b;
+        border-color: #00796b;
+        transition: background-color 0.3s, border-color 0.3s;
+    }
+    .btn-secondary:hover {
+        background-color: #005f56;
+        border-color: #005f56;
+    }
+</style>

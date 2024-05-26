@@ -15,15 +15,18 @@ namespace apiPc3.Controllers
     {
         private readonly ILogger<UsuarioController> _logger;
         private readonly ListarUsuariosApiIntegration _listUsers;
+        private readonly ListarUnUsuarioApiIntegration _unUser;
         private readonly CrearUsuarioApiIntegration _createUser;
     
 
     public UsuarioController(ILogger<UsuarioController> logger,
         ListarUsuariosApiIntegration listUsers,
+        ListarUnUsuarioApiIntegration unUser,
         CrearUsuarioApiIntegration createUser)
         {
             _logger = logger;
             _listUsers = listUsers;
+            _unUser = unUser;
             _createUser = createUser;
         }
     [HttpGet]
@@ -32,6 +35,13 @@ namespace apiPc3.Controllers
             List<Usuario> users = await _listUsers.GetAllUser();
             return View(users);
         }
+
+     [HttpGet]
+        public async Task<IActionResult> Perfil(int Id)
+        {
+            Usuario user = await _unUser.GetUser(Id);
+            return View(user);
+        }   
 
     public IActionResult Create()
         {
